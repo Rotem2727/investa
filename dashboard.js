@@ -17,7 +17,7 @@ const firebaseConfig = {
     measurementId: "G-EE5FEY81E6"
 };
 
-const MAIN_API_BASE_URL = "http://127.0.0.1:8000";
+const MAIN_API_BASE_URL = "/api";
 const WEBSOCKET_URL = "ws://127.0.0.1:8822";
 
 let app, auth, db;

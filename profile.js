@@ -450,7 +450,7 @@ tabButtons.forEach(button => {
 
 async function fetchStockData(symbol) {
      try {
-         const response = await fetch(`http://127.0.0.1:8000/get-company-data?symbol=${symbol}`);
+         const response = await fetch(`/api/get-company-data?symbol=${symbol}`);
          if (!response.ok) {
              // const errorDetail = await response.text();
              return { ticker: symbol, error: true, message: `Could not load data (${response.status})` };
