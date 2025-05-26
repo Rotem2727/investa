@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INVESTA - Track, Share, and Grow Your Portfolio</title>
+<link
+href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap"
+rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Inconsolata', monospace;
+background-color: #ffffff;
+color: #333;
+line-height: 1.6;
+}
+header {
+position: fixed;
+width: 100%;
+top: 0;
+left: 0;
+z-index: 1000;
+background-color: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(5px);
+padding: 15px 25px;
+transition: top 0.3s ease-in-out;
+border-bottom: 1px solid #eee;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+nav {
+display: flex;
+justify-content: space-between;
+align-items: center;
+max-width: 1200px;
+margin: 0 auto;
+}
+.logo {
+
+font-size: 20px;
+font-weight: 700;
+}
+.logo a {
+text-decoration: none;
+color: #333;
+}
+.nav-links ul {
+list-style-type: none;
+display: flex;
+gap: 15px;
+}
+.nav-links ul li a {
+text-decoration: none;
+font-size: 14px;
+color: #333;
+font-weight: 700;
+padding: 8px 15px;
+border-radius: 6px;
+transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+.nav-links ul li a:hover,
+.nav-links ul li a.active {
+background-color: #0056b3;
+color: white;
+transform: translateY(-2px);
+}
+.hero-section {
+background-color: #f8f9fa;
+text-align: center;
+padding: 150px 25px 100px;
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+background-image: radial-gradient(#e0e0e0 0.5px, transparent 0.5px);
+background-size: 15px 15px;
+}
+.hero-content {
+max-width: 700px;
+margin: 0 auto;
+}
+
+.hero-content h1 {
+font-size: 36px;
+font-weight: 700;
+margin-bottom: 20px;
+color: #212529;
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 1s ease 0.5s, transform 1s ease 0.5s;
+}
+.hero-content p {
+font-size: 18px;
+margin-bottom: 30px;
+color: #555;
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 1s ease 1s, transform 1s ease 1s;
+}
+.hero-section.visible .hero-content h1,
+.hero-section.visible .hero-content p {
+opacity: 1;
+transform: translateY(0);
+}
+.cta-button {
+display: inline-block;
+background-color: #0056b3;
+color: white;
+padding: 12px 30px;
+font-size: 16px;
+font-weight: bold;
+text-decoration: none;
+border-radius: 6px;
+transition: opacity 1s ease 1.5s, transform 1s ease 1.5s, background-color
+
+0.3s, transform 0.2s; /* Combined transitions */
+
+opacity: 0;
+transform: translateY(20px);
+}
+.hero-section.visible .cta-button {
+opacity: 1;
+transform: translateY(0);
+}
+.cta-button:hover {
+background-color: #00408d;
+transform: translateY(-2px) scale(1.02);
+}
+@media (max-width: 768px) {
+header {
+padding: 10px 15px;
+}
+.nav-links {
+display: none;
+}
+.hero-content h1 {
+font-size: 28px;
+}
+.hero-content p {
+font-size: 16px;
+}
+.cta-button {
+padding: 10px 25px;
+font-size: 14px;
+}
+}
+</style>
+</head>
+<body>
+<header id="mainHeader">
+<nav>
+<div class="logo">
+<a href="#">INVESTA</a>
+</div>
+<div class="nav-links">
+<ul>
+<li><a href="#">Contact</a></li>
+<li><a href="./login.html">Login / Sign Up</a></li>
+</ul>
+</div>
+</nav>
+</header>
+<section class="hero-section" id="hero">
+<div class="hero-content">
+<h1>INVESTA: Your Social Portfolio Hub</h1>
+<p>Effortlessly manage your investments, connect with other investors, and
+discover new strategies. Take control of your financial journey with INVESTA.</p>
+<a href="./login.html" class="cta-button">Start Managing Your Portfolio</a>
+</div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const heroSection = document.getElementById('hero');
+const observerOptions = {
+root: null,
+rootMargin: '0px',
+threshold: 0.1
+};
+const observerCallback = (entries, observer) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('visible');
+}
+});
+};
+const heroObserver = new IntersectionObserver(observerCallback,
+
+observerOptions);
+
+if (heroSection) {
+heroObserver.observe(heroSection);
+}
+});
+</script>
+</body>
+</html>
