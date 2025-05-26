@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/getStocksData.py",
+      "src": "api/stock-data.py",
       "use": "@vercel/python"
     },
     {
@@ -36,8 +36,16 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/getStocksData.py"
+      "src": "/api/get-company-data",
+      "dest": "/api/stock-data.py"
+    },
+    {
+      "src": "/api/get-market-status",
+      "dest": "/api/stock-data.py"
+    },
+    {
+      "src": "/api/get-market-news",
+      "dest": "/api/stock-data.py"
     },
     {
       "src": "/_next/static/(.*)",
