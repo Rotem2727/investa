@@ -1,0 +1,779 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Inconsolata', monospace;
+    background-color: #f8f9fa;
+    color: #333;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    padding: 10px 20px;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+.logo {
+    font-size: 18px;
+    font-weight: 700;
+    margin-right: 20px;
+}
+.logo a {
+    text-decoration: none;
+    color: #333;
+}
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 10px;
+    border-left: 1px solid #eee;
+}
+#user-greeting {
+     font-size: 14px;
+     font-weight: 600;
+     color: #333;
+}
+#profile-picture-container {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    background-color: #eee;
+     border: 1px solid #ccc;
+}
+.user-info img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     display: block;
+}
+.user-text-details {
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+}
+.user-text-details span {
+     align-self: center;
+}
+#logout-button {
+    background-color: transparent;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+#logout-button:hover {
+    background-color: #dc3545;
+    color: white;
+    transform: translateY(-1px);
+}
+.nav-links ul {
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+.nav-links ul li a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #333;
+    font-weight: 600;
+    padding: 8px 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+ .nav-links ul li a:hover,
+ .nav-links ul li a.active {
+    background-color: #e9ecef;
+}
+.dashboard-layout {
+    display: flex;
+    flex-grow: 1;
+    margin-top: 55px;
+    height: calc(100vh - 55px);
+    overflow: hidden;
+}
+#left-panel {
+    width: 280px;
+    border-right: 1px solid #ddd;
+    background-color: #fff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    flex-shrink: 0;
+    overflow-y: auto;
+}
+.right-content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    height: 100%;
+    background-color: #f8f9fa;
+}
+.left-panel-section {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+.section-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 10px;
+}
+.section-header h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+.refresh-button {
+     background: none;
+     border: none;
+     padding: 2px;
+     cursor: pointer;
+     color: #6c757d;
+     transition: color 0.2s, transform 0.2s;
+     display: inline-flex;
+     align-items: center;
+     justify-content: center;
+}
+.refresh-button .icon {
+    font-size: 18px;
+}
+.refresh-button:hover {
+    color: #0056b3;
+    transform: rotate(90deg);
+}
+.refresh-button:disabled {
+    color: #adb5bd;
+    cursor: not-allowed;
+    transform: none;
+}
+.scrollable-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    min-height: 80px;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f0f0f0;
+}
+.scrollable-list::-webkit-scrollbar { width: 6px; }
+.scrollable-list::-webkit-scrollbar-track { background: #f0f0f0; border-radius: 3px; }
+.scrollable-list::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 3px; }
+.empty-list-message, .info-message, .error-message {
+    font-size: 13px;
+    color: #777;
+    text-align: center;
+    padding: 15px 10px;
+}
+.error-message {
+    color: #dc3545;
+    font-weight: bold;
+}
+.market-status-indicator {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #333;
+}
+#market-status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+    flex-shrink: 0;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+#market-status-text {
+    font-weight: bold;
+}
+.market-open #market-status-dot { background-color: #28a745; }
+.market-closed #market-status-dot { background-color: #dc3545; }
+.market-unknown #market-status-dot { background-color: #adb5bd; }
+.saved-stocks-container { flex-grow: 1; min-height: 0; }
+.top-stocks-container { flex-grow: 1; min-height: 0; border-bottom: none; }
+.stock-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 5px;
+    gap: 8px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.stock-row:last-child { border-bottom: none; }
+.stock-row:hover { background-color: #f1f3f5; }
+.stock-info { display: flex; align-items: center; gap: 8px; flex-shrink: 1; min-width: 0; }
+.stock-logo { width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; object-fit: contain; background-color: #eee; }
+.stock-details { display: flex; flex-direction: column; gap: 1px; flex-shrink: 1; min-width: 0; }
+.symbol-container { display: flex; align-items: center; gap: 4px; }
+.symbol { font-weight: bold; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.company-name { font-size: 10px; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.stock-price-info { display: flex; align-items: center; gap: 8px; flex-shrink: 0; text-align: right;}
+.stock-price { font-weight: bold; font-size: 12px; color: black; }
+.stock-change { font-weight: bold; font-size: 11px; padding: 2px 4px; border-radius: 3px; }
+.positive { color: #198754; background-color: rgba(25, 135, 84, 0.1); }
+.negative { color: #dc3545; background-color: rgba(220, 53, 69, 0.1); }
+.save-remove-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    color: #adb5bd;
+    transition: color 0.2s ease, transform 0.1s ease;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+}
+.save-remove-button:hover {
+    color: #ffc107;
+    transform: scale(1.1);
+}
+.save-remove-button.saved {
+    color: #ffc107;
+    font-variation-settings: 'FILL' 1;
+}
+.save-remove-button::before {
+    content: "star";
+}
+.search-container {
+    display: flex;
+    padding: 0 0 20px 0;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+.users-search-container {
+     padding: 0 0 15px 0;
+     margin-bottom: 15px;
+     border-bottom: 1px solid #eee;
+}
+#stock-search-input, #user-search-input, #chat-input {
+    flex-grow: 1;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: 'Inconsolata', monospace;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+#stock-search-input:focus, #user-search-input:focus, #chat-input:focus {
+    outline: none;
+    border-color: #0056b3;
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.2);
+}
+#search-button, #user-search-button, #send-chat-button {
+    padding: 10px 20px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+#search-button:hover, #user-search-button:hover, #send-chat-button:hover {
+    background-color: #00408d;
+}
+#search-result-display, #user-search-results-display {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-height: 100px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+}
+#user-search-results-display {
+    margin-bottom: 15px;
+}
+.loading-message {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    padding: 30px 10px;
+}
+.large-stock-display {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e0e0e0;
+    background-color: #fff;
+}
+.large-stock-display h2,
+.large-stock-display .large-symbol,
+.large-stock-display .large-price,
+.large-stock-display .key-metrics strong {
+    color: #111;
+}
+.company-header { display: flex; align-items: center; gap: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+.large-stock-logo { width: 50px; height: 50px; border-radius: 50%; object-fit: contain; background-color: #eee; }
+.company-title { display: flex; flex-direction: column; flex-grow: 1; }
+.title-line-1 { display: flex; align-items: center; gap: 10px; margin-bottom: 2px; }
+.large-symbol { font-size: 22px; font-weight: bold; color: #333; }
+.company-title .save-remove-button { font-size: 24px; width: 30px; height: 30px; }
+.large-company-name { font-size: 16px; color: #555; }
+.company-website { font-size: 13px; color: #0056b3; text-decoration: none; margin-top: 4px; word-break: break-all; }
+.company-website:hover { text-decoration: underline; }
+.price-info { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.large-price { font-size: 32px; font-weight: bold; color: #000; }
+.large-price-change { font-size: 16px; font-weight: bold; padding: 3px 6px; border-radius: 4px; }
+.key-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+.metric-item { font-size: 13px; color: #555; }
+.metric-item span { display: block; margin-bottom: 2px; font-weight: 600; }
+.metric-item strong { color: #333; font-size: 14px; }
+.stock-actions-large { display: flex; gap: 15px; margin-top: 15px; justify-content: flex-start; padding-top: 15px; border-top: 1px solid #eee; }
+.stock-actions-large .action-button {
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+.stock-actions-large .action-button:hover:not(:disabled) { transform: translateY(-2px); }
+.stock-actions-large .action-button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; background-color: #ccc !important; color: #666 !important; }
+.buy-button-large { background-color: #28a745; color: white; }
+.buy-button-large:hover:not(:disabled) { background-color: #218838; }
+.sell-button-large { background-color: #dc3545; color: white; }
+.sell-button-large:hover:not(:disabled) { background-color: #c82333; } /* Corrected class name */
+.buy-button-large::before { content: 'shopping_cart'; font-family: 'Material Symbols Outlined'; font-size: 18px; }
+.sell-button-large::before { content: 'sell'; font-family: 'Material Symbols Outlined'; font-size: 18px; }
+#portfolio-container {
+     padding: 20px;
+     border: 1px solid #ddd;
+     border-radius: 8px;
+     background-color: #fff;
+     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+     margin-bottom: 25px;
+}
+ .portfolio-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     border-bottom: 1px solid #eee;
+     padding-bottom: 10px;
+     margin-bottom: 15px;
+ }
+ .portfolio-header h3 { font-size: 18px; color: #333; margin: 0; }
+ .portfolio-header .refresh-button { margin-left: 10px; }
+.portfolio-summary { display: flex; gap: 15px; margin-bottom: 15px; flex-wrap: wrap; font-size: 14px; }
+#total-portfolio-value, #total-profit-loss, #total-cost-basis { font-weight: 600; color: #555; }
+#total-portfolio-value span, #total-profit-loss span, #total-cost-basis span { font-weight: bold; color: #333; margin-left: 5px; }
+#total-profit-loss .value.positive { color: #198754; }
+.portfolio-profit-loss .negative { color: #dc3545; } /* This seems to be a duplicate or mis-scoped rule */
+.portfolio-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    gap: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.portfolio-item:last-child { border-bottom: none; }
+.portfolio-item:hover { background-color: #f9f9f9; }
+.portfolio-stock-info { display: flex; align-items: center; gap: 10px; flex-grow: 1; min-width: 0; }
+.portfolio-stock-logo { width: 28px; height: 28px; border-radius: 50%; object-fit: contain; background-color: #eee; }
+.portfolio-stock-details { display: flex; flex-direction: column; gap: 2px; overflow: hidden; }
+.portfolio-symbol { font-weight: bold; font-size: 13px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.portfolio-company-name { font-size: 11px; color: #555; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.portfolio-value-info { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0; text-align: right; }
+.portfolio-current-value strong, .portfolio-average-price strong { color: #333; font-weight: bold; margin-left: 4px; }
+.portfolio-profit-loss { font-size: 13px; font-weight: bold; }
+.portfolio-profit-loss span { margin-left: 4px; }
+.portfolio-profit-loss .positive { color: #198754; }
+.portfolio-profit-loss .negative { color: #dc3545; }
+#market-news-container {
+     padding: 20px;
+     border: 1px solid #ddd;
+     border-radius: 8px;
+     background-color: #fff;
+     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+     margin-bottom: 25px;
+}
+ .news-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     border-bottom: 1px solid #eee;
+     padding-bottom: 10px;
+     margin-bottom: 15px;
+ }
+ .news-header h3 { font-size: 18px; color: #333; margin: 0; }
+ .news-header .refresh-button { margin-left: 10px; }
+ .news-list { max-height: 400px; overflow-y: auto; padding-right: 5px; }
+ .news-item {
+     border-bottom: 1px solid #f0f0f0;
+     padding: 12px 0;
+     display: flex;
+     gap: 15px;
+ }
+ .news-item:last-child { border-bottom: none; }
+ .news-image { width: 80px; height: 60px; object-fit: cover; border-radius: 4px; flex-shrink: 0; background-color: #eee; }
+ .news-content { display: flex; flex-direction: column; gap: 4px; }
+ .news-headline { font-size: 14px; font-weight: bold; color: #333; text-decoration: none; }
+ .news-headline:hover { color: #0056b3; text-decoration: underline; }
+ .news-summary { font-size: 12px; color: #555; line-height: 1.5; }
+ .news-source-time { font-size: 11px; color: #888; }
+#users-directory-container {
+     padding: 20px;
+     border: 1px solid #ddd;
+     border-radius: 8px;
+     background-color: #fff;
+     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+     margin-bottom: 25px;
+}
+.users-directory-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     border-bottom: 1px solid #eee;
+     padding-bottom: 10px;
+     margin-bottom: 15px;
+}
+.users-directory-header h3 { font-size: 18px; color: #333; margin: 0; }
+.users-list { max-height: 400px; overflow-y: auto; padding-right: 5px; }
+.user-directory-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    gap: 15px;
+}
+.user-directory-item:last-child { border-bottom: none; }
+.user-directory-info { display: flex; align-items: center; gap: 10px; flex-grow: 1; min-width: 0; }
+.user-directory-pfp { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background-color: #eee; }
+.user-directory-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-grow: 1;
+    min-width: 0;
+}
+.user-directory-username { font-weight: bold; font-size: 14px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-directory-stats {
+    display: flex;
+    gap: 15px;
+    font-size: 12px;
+    color: #555;
+    white-space: nowrap;
+}
+.user-pl.positive { color: #198754; }
+.user-pl.negative { color: #dc3545; }
+.user-directory-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-shrink: 0;
+}
+.follow-button {
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    border: 1px solid #0056b3;
+    background-color: #0056b3;
+    color: white;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+    flex-shrink: 0;
+}
+.follow-button:hover:not(:disabled) {
+    background-color: #00408d;
+    transform: translateY(-1px);
+}
+.follow-button.following {
+    background-color: transparent;
+    color: #0056b3;
+    border-color: #0056b3;
+}
+.follow-button.following:hover:not(:disabled) {
+    background-color: rgba(0, 86, 179, 0.1);
+}
+.follow-button:disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    transform: none;
+}
+.message-button {
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    border: 1px solid #0d6efd;
+    background-color: #0d6efd;
+    color: white;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.1s ease;
+    flex-shrink: 0;
+}
+.message-button:hover:not(:disabled) {
+    background-color: #0b5ed7;
+    border-color: #0b5ed7;
+    transform: translateY(-1px);
+}
+.message-button:disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    transform: none;
+}
+#notification-area {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1050;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+}
+.notification {
+    background-color: #333;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    font-size: 14px;
+    max-width: 300px;
+}
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+.notification.success { background-color: #28a745; }
+.notification.error { background-color: #dc3545; }
+.notification.info { background-color: #0d6efd; }
+.conversations-tab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+.conversations-tab.collapsed {
+    max-height: 40px;
+}
+.tab-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #0056b3;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+.tab-header span {
+    font-size: 14px;
+}
+.toggle-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.conversations-tab.collapsed .toggle-button {
+    transform: rotate(180deg);
+}
+.tab-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 15px;
+    font-size: 13px;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc #f0f0f0;
+}
+.chat-messages::-webkit-scrollbar { width: 6px; }
+.chat-messages::-webkit-scrollbar-track { background: #f0f0f0; border-radius: 3px; }
+.chat-messages::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 3px; }
+.chat-input-area {
+    display: flex;
+    padding: 10px 15px;
+    border-top: 1px solid #eee;
+    background-color: #f8f9fa;
+    flex-shrink: 0;
+    gap: 10px;
+    align-items: center;
+}
+.chat-message {
+    display: flex;
+    flex-direction: column;
+    max-width: 85%;
+    word-break: break-word;
+    border-radius: 8px;
+    padding: 8px 12px;
+}
+.chat-message strong {
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+.chat-message span {
+    font-size: 13px;
+}
+.chat-message.sent {
+    align-self: flex-end;
+    background-color: #007bff;
+    color: white;
+}
+.chat-message.received {
+    align-self: flex-start;
+    background-color: #e9ecef;
+    color: #333;
+}
+.chat-message.status {
+    align-self: center;
+    font-style: italic;
+    font-size: 11px;
+    color: #6c757d;
+    background-color: transparent;
+    padding: 4px 8px;
+}
+@media (max-width: 992px) {
+    #left-panel { width: 240px; }
+    .large-symbol { font-size: 20px; }
+    .large-price { font-size: 28px; }
+    .large-price-change { font-size: 15px; }
+    .stock-actions-large .action-button { font-size: 14px; padding: 8px 16px; }
+    .portfolio-summary { font-size: 13px; }
+    .conversations-tab { width: 250px; }
+}
+@media (max-width: 768px) {
+    .dashboard-layout { flex-direction: column; height: auto; margin-top: 55px; }
+    #left-panel {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        max-height: 45vh;
+        overflow-y: auto;
+        order: 2;
+    }
+    .right-content {
+        height: auto;
+        padding: 15px;
+        order: 1;
+         overflow-y: visible;
+    }
+     .scrollable-list { max-height: 180px; }
+     .key-metrics { grid-template-columns: 1fr 1fr; }
+     .stock-actions-large { justify-content: center; }
+     #user-email { display: none; }
+     .search-container { padding-bottom: 15px; margin-bottom: 15px; }
+     #search-result-display, #portfolio-container, #market-news-container, #users-directory-container, #user-search-results-display { padding: 15px; margin-bottom: 20px; }
+     .portfolio-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+     .portfolio-value-info { align-items: flex-start; }
+     .news-list, .users-list { max-height: 300px; }
+     .news-item { flex-direction: column; }
+     .news-image { width: 100%; height: 100px; margin-bottom: 10px; }
+     .portfolio-header, .news-header, .section-header, .users-directory-header { flex-direction: column; align-items: flex-start; gap: 5px; }
+     .portfolio-header .refresh-button, .news-header .refresh-button, .section-header .refresh-button { margin-left: 0; }
+     .portfolio-summary { flex-direction: column; gap: 5px; align-items: flex-start; }
+     .user-directory-item { flex-direction: column; align-items: flex-start; gap: 8px; }
+     .user-directory-info { width: 100%; justify-content: space-between;}
+     .user-directory-details { flex-grow: 1; }
+     .user-directory-actions { width: 100%; justify-content: center; }
+     .follow-button, .message-button { flex-grow: 1; text-align: center; justify-content: center;}
+     .conversations-tab { width: calc(100% - 40px); right: 20px; left: 20px; bottom: 10px; }
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.spin {
+    animation: spin 1s linear infinite;
+}

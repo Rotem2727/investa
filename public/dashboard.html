@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - INVESTA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="dashboard.html">INVESTA</a>
+             </div>
+             <div class="header-right">
+                 <div class="nav-links">
+                     <ul>
+                         <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                         <li><a href="profile.html">My Profile</a></li>
+                         <li><a href="settings.html">Settings</a></li>
+                     </ul>
+                 </div>
+                 <div class="user-info">
+                     <div id="profile-picture-container">
+                        <img id="user-profile-picture" src="https://placehold.co/30x30/eee/ccc?text=?" alt="Profile Picture">
+                     </div>
+                     <div class="user-text-details">
+                         <span id="user-greeting">Loading...</span>
+                         </div>
+                    <button id="logout-button">Logout</button>
+                 </div>
+             </div>
+        </nav>
+    </header>
+
+    <div class="dashboard-layout">
+        <aside id="left-panel">
+            <div class="market-status-container left-panel-section">
+                 <div class="market-status-indicator" id="market-status-indicator">
+                    <div id="market-status-dot"></div>
+                    <span id="market-status-text">Checking Status...</span>
+                 </div>
+            </div>
+
+            <div class="saved-stocks-container left-panel-section">
+                <div class="section-header">
+                     <h3>My Watchlist</h3>
+                     <button class="refresh-button" id="refresh-watchlist-btn" title="Refresh Watchlist">
+                         <span class="icon material-symbols-outlined">refresh</span>
+                     </button>
+                 </div>
+                <div id="saved-stock-list" class="scrollable-list">
+                    <p class="info-message">Loading watchlist...</p>
+                </div>
+            </div>
+
+            <div class="top-stocks-container left-panel-section">
+                 <div class="section-header">
+                     <h3>Market Movers</h3>
+                      <button class="refresh-button" id="refresh-movers-btn" title="Refresh Market Movers">
+                          <span class="icon material-symbols-outlined">refresh</span>
+                      </button>
+                 </div>
+                 <div class="scrollable-list" id="stock-list">
+                     <p class="info-message">Loading market data...</p>
+                 </div>
+            </div>
+        </aside>
+
+        <main class="right-content">
+            <div class="search-container">
+                <input type="text" id="stock-search-input" placeholder="Search stock symbol (e.g., AAPL, MSFT)">
+                <button id="search-button">Search</button>
+            </div>
+
+            <div id="search-result-display">
+                 <p class="info-message">Search for a stock or select one from the lists.</p>
+            </div>
+
+            <div id="portfolio-container">
+                 <div class="portfolio-header">
+                     <h3>My Portfolio</h3>
+                      <button class="refresh-button" id="refresh-portfolio-btn" title="Refresh Portfolio">
+                           <span class="icon material-symbols-outlined">refresh</span>
+                       </button>
+                 </div>
+                 <div class="portfolio-summary">
+                     <div id="total-portfolio-value">Value: <span>Calculating...</span></div>
+                     <div id="total-cost-basis">Cost: <span>Calculating...</span></div>
+                     <div id="total-profit-loss">P/L: <span class="value">Calculating...</span></div>
+                 </div>
+                 <div id="portfolio-list" class="scrollable-list">
+                    <p class="info-message">Loading portfolio...</p>
+                </div>
+            </div>
+
+             <div id="market-news-container">
+                  <div class="news-header">
+                      <h3>Market News</h3>
+                       <button class="refresh-button" id="refresh-news-btn" title="Refresh News">
+                           <span class="icon material-symbols-outlined">refresh</span>
+                       </button>
+                  </div>
+                 <div id="news-list" class="news-list scrollable-list">
+                     <p class="info-message">Loading news...</p>
+                 </div>
+             </div>
+
+             <div id="users-directory-container">
+                  <div class="users-directory-header">
+                      <h3>Other Users</h3>
+                  </div>
+                  <div class="search-container users-search-container">
+                      <input type="text" id="user-search-input" placeholder="Search for users...">
+                     <button id="user-search-button">Search User</button>
+                 </div>
+                 <div id="user-search-results-display">
+                     <p class="info-message">Search for a user by username.</p>
+                 </div>
+                 <div id="users-list" class="users-list scrollable-list">
+                     <p class="info-message">Loading users...</p>
+                 </div>
+             </div>
+        </main>
+    </div>
+
+    <div id="notification-area"></div>
+
+    <div id="conversations-tab" class="conversations-tab collapsed">
+        <div class="tab-header">
+            <span>Global Chat</span> <button id="toggle-conversations" class="toggle-button">▼</button>
+        </div>
+        <div class="tab-content">
+            <div id="chat-messages" class="chat-messages">
+                <p class="info-message">Connecting to chat...</p>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type your message...">
+                <button id="send-chat-button">Send</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js" type="module"></script>
+    <script type="module" src="dashboard.js" defer></script>
+</body>
+</html>

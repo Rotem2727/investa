@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - INVESTA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="user_profile.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="dashboard.html">INVESTA</a>
+            </div>
+             <div class="header-right">
+                 <div class="nav-links">
+                     <ul>
+                         <li><a href="dashboard.html">Dashboard</a></li>
+                         <li><a href="profile.html">My Profile</a></li>
+                         <li><a href="settings.html">Settings</a></li>
+                     </ul>
+                 </div>
+                 <div class="user-info">
+                     <div id="profile-picture-container">
+                        <img id="user-profile-picture" src="https://placehold.co/30x30/eee/ccc?text=?" alt="Profile Picture">
+                     </div>
+                     <div class="user-text-details">
+                         <span id="user-greeting">Loading...</span>
+                     </div>
+                    <button id="logout-button">Logout</button>
+                 </div>
+             </div>
+        </nav>
+    </header>
+
+    <main class="profile-container">
+        <div id="notification-area-user-profile"></div>
+
+        <section class="profile-header-section">
+            <div class="profile-picture-area">
+                <img id="user-profile-picture-display" src="https://placehold.co/200x200/eee/ccc?text=?" alt="User Profile Picture">
+            </div>
+            <div class="profile-info-area">
+                <div class="username-and-actions">
+                    <h1 id="user-profile-username">Loading...</h1>
+                    <div class="user-actions">
+                         <button class="btn btn-secondary btn-small follow-button" id="follow-user-button" data-user-id="">Follow</button>
+                    </div>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="user-profile-portfolio-count">0</span>
+                        <span class="stat-label">Stocks</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="user-profile-followers">0</span>
+                        <span class="stat-label">Followers</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="user-profile-transactions-count">0</span>
+                        <span class="stat-label">Trades</span>
+                    </div>
+                </div>
+                <div class="profile-bio">
+                    
+                    <p id="user-profile-member-since">Member Since: Loading...</p>
+                    <p id="user-profile-pl" class="profile-bio-item">Total P/L: Loading...</p>
+    
+                </div>
+            </div>
+        </section>
+        <section id="user-profile-bio-section" style="text-align: center;">
+            <p id="user-profile-bio-text">Loading bio...</p>
+        </section>
+        <section class="profile-content-section">
+             <div class="content-tabs">
+                 <button class="tab-button active" data-tab="portfolio">Portfolio</button>
+                 <button class="tab-button" data-tab="transactions">Recent Trades</button>
+             </div>
+
+             <div id="portfolio-tab" class="tab-content active">
+                 <div class="portfolio-summary-details" id="user-profile-portfolio-summary">
+                     <div class="summary-item">
+                         <span class="summary-label">Total Value:</span>
+                         <span class="summary-value" id="user-profile-total-value">Loading...</span>
+                     </div>
+                     <div class="summary-item">
+                         <span class="summary-label">Total P/L:</span>
+                         <span class="summary-value" id="user-profile-total-pl-summary">Loading...</span>
+                     </div>
+                 </div>
+                 <div id="user-profile-portfolio-list" class="content-list">
+                     <p class="info-message">Loading portfolio details... (Portfolio may be private)</p>
+                 </div>
+             </div>
+
+             <div id="transactions-tab" class="tab-content">
+                  <div id="user-profile-transactions-list" class="content-list">
+                     <p class="info-message">Loading recent transactions...</p>
+                 </div>
+             </div>
+        </section>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-auth.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore.js" type="module"></script>
+    <script type="module" src="user_profile.js" defer></script>
+</body>
+</html>
